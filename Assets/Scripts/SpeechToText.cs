@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 /// <summary>
 /// SpeechToText - Voice capture and transcription
@@ -20,7 +21,51 @@ using UnityEngine;
 ///   - Documentation: https://developers.deepgram.com
 /// </summary>
 
-public class SpeechToText
+public class SpeechToText : MonoBehaviour
 {
-    
+    private DictationRecognizer dictationRecognizer;
+    public AgentController agentController;
+
+    void Start()
+    {
+        dictationRecognizer = new DictationRecognizer();
+
+        // Fires when a phrase is recognized
+        dictationRecognizer.DictationResult += OnDictationResult;
+
+        // Fires on partial results (optional, good for debugging)
+        dictationRecognizer.DictationHypothesis += OnDictationHypothesis;
+
+        // Fires on error
+        dictationRecognizer.DictationError += OnDictationError;
+
+        dictationRecognizer.Start();
+        Debug.Log("Dictation started, listening...");
+    }
+
+    private void OnDictationResult(string text, ConfidenceLevel confidence)
+    {
+        Debug.Log("You said: " + text);
+        // This is where we'll send text to the LLM later
+        agentController.ReceiveUserInput(text);
+    }
+
+    private void OnDictationHypothesis(string text)
+    {
+        Debug.Log("Hearing: " + text); // live partial result
+    }
+
+    private void OnDictationError(string error, int hresult)
+    {
+        Debug.LogError("Dictation error: " + error);
+        // Restart on error
+        dictationRecognizer.Start();
+    }
+
+    void OnDestroy()
+    {
+        dictationRecognizer.DictationResult -= OnDictationResult;
+        dictationRecognizer.Stop();
+        dictationRecognizer.Dispose();
+    }
 }
