@@ -84,6 +84,7 @@ public class LLMService : MonoBehaviour
         LLMRequest requestData = new LLMRequest
         {
             model = model,
+            max_tokens = 1024,
             messages = new Message[]
             {
                 new Message { role = "system", content = systemPrompt },
@@ -92,6 +93,7 @@ public class LLMService : MonoBehaviour
         };
 
         string jsonBody = JsonUtility.ToJson(requestData);
+        Debug.Log("JSON enviado: " + jsonBody);
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonBody);
 
         UnityWebRequest request = new UnityWebRequest(apiUrl, "POST");
@@ -100,6 +102,7 @@ public class LLMService : MonoBehaviour
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
         request.SetRequestHeader("Accept", "application/json");
+        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
         request.timeout = requestTimeout;
 
         Debug.Log("Sending to NVIDIA NIM: " + userText);
