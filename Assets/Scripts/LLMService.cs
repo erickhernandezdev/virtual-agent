@@ -34,13 +34,13 @@ public class Choice
 public class LLMService : MonoBehaviour
 {
     [Header("NVIDIA NIM Settings")]
-    public string apiKeyEnvVarName = "NVIDIA_API_KEY";
-    public string apiUrl = "https://integrate.api.nvidia.com/v1/chat/completions";
-    public string model = "deepseek-ai/deepseek-v4-pro";
-    public int requestTimeout = 30;
+    public string apiKeyEnvVarName = "OPEN_ROUTER_KEY";
+    public string apiUrl = "https://openrouter.ai/api/v1/chat/completions";
+    public string model = "meta-llama/llama-3.1-8b-instruct";
+    public int requestTimeout = 120;
 
     [TextArea(3, 6)]
-    public string systemPrompt = "Eres un agente virtual amigable. Responde siempre en español.";
+    public string systemPrompt = "Eres un agente virtual amigable y natural. Responde siempre en español de forma conversacional, breve y clara.";
 
     private AgentController agentController;
     private Coroutine currentRequest;
@@ -68,6 +68,7 @@ public class LLMService : MonoBehaviour
         {
             Debug.LogError($"Environment variable '{apiKeyEnvVarName}' is not set. Please set it before running.");
         }
+        
         return key;
     }
 
@@ -84,7 +85,7 @@ public class LLMService : MonoBehaviour
         LLMRequest requestData = new LLMRequest
         {
             model = model,
-            max_tokens = 1024,
+            max_tokens = 512,
             messages = new Message[]
             {
                 new Message { role = "system", content = systemPrompt },
@@ -102,7 +103,6 @@ public class LLMService : MonoBehaviour
         request.SetRequestHeader("Content-Type", "application/json");
         request.SetRequestHeader("Authorization", "Bearer " + apiKey);
         request.SetRequestHeader("Accept", "application/json");
-        request.SetRequestHeader("Access-Control-Allow-Origin", "*");
         request.timeout = requestTimeout;
 
         Debug.Log("Sending to NVIDIA NIM: " + userText);

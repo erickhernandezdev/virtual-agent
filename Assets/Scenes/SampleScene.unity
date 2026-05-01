@@ -672,7 +672,7 @@ AudioSource:
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
-  Pan2D: 0
+  Pan2D: 0.29
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
@@ -771,10 +771,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ee8a914eb3ddf48b6eac8765ee8a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LLMService
-  apiKeyEnvVarName: NVIDIA_API_KEY
-  apiUrl: https://integrate.api.nvidia.com/v1/chat/completions
-  model: meta/llama-3.1-8b-instruct
-  requestTimeout: 30
+  apiKeyEnvVarName: OPEN_ROUTER_KEY
+  apiUrl: https://openrouter.ai/api/v1/chat/completions
+  model: meta-llama/llama-3.1-8b-instruct
+  requestTimeout: 512
   systemPrompt: "Eres un agente virtual amigable. Responde siempre en espa\xF1ol."
 --- !u!1 &1989999322
 GameObject:
