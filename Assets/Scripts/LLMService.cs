@@ -34,7 +34,6 @@ public class Choice
 public class LLMService : MonoBehaviour
 {
     [Header("OpenRouter Settings")]
-    public string apiKey;
     public string apiUrl = "https://openrouter.ai/api/v1/chat/completions";
     public string model = "meta-llama/llama-3.1-8b-instruct";
     public int maxTokens = 150;
@@ -43,15 +42,16 @@ public class LLMService : MonoBehaviour
     [TextArea(3, 6)]
     public string systemPrompt = "Eres un agente virtual amigable y natural. Responde siempre en español de forma conversacional, breve y clara.";
 
+    private string apiKey;
     private AgentController agentController;
     private Coroutine currentRequest;
 
     void Start()
     {
         agentController = GetComponent<AgentController>();
-
+        apiKey = System.Environment.GetEnvironmentVariable("OPENROUTER_API_KEY");
         if (string.IsNullOrEmpty(apiKey))
-            Debug.LogError("API Key is empty! Paste your OpenRouter key in the Inspector.");
+            Debug.LogError("OPENROUTER_API_KEY environment variable not set!");
     }
 
     public void SendToLLM(string userText)

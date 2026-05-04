@@ -1250,7 +1250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29ee8a914eb3ddf48b6eac8765ee8a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LLMService
-  apiKey: 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
+  apiKey: 
   apiUrl: https://openrouter.ai/api/v1/chat/completions
   model: meta-llama/llama-3.1-8b-instruct
   maxTokens: 150
