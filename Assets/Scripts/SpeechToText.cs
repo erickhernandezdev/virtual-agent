@@ -13,7 +13,7 @@ public class SpeechToText : MonoBehaviour
     private AudioClip recordedClip;
     private string microphoneDevice;
 
-    private string apiKey = "AIzaSyAkw7voHo0gPWuqxi3x7jFP0WyojzIA7q4";
+    private string apiKey;
     private string googleSTTUrl = "https://speech.googleapis.com/v1/speech:recognize";
 
     void Start()
@@ -25,6 +25,9 @@ public class SpeechToText : MonoBehaviour
         }
         microphoneDevice = Microphone.devices[0];
         Debug.Log("Microphone ready: " + microphoneDevice);
+        apiKey = System.Environment.GetEnvironmentVariable("GOOGLE_STT_API_KEY");
+        if (string.IsNullOrEmpty(apiKey))
+            Debug.LogError("GOOGLE_STT_API_KEY environment variable not set!");
     }
 
     void Update()
