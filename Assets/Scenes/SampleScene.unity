@@ -1261,7 +1261,7 @@ MonoBehaviour:
     interesante. No eres neutral \u2014 ten\xE9s opiniones y las defend\xE9s con
     argumentos.\r\n\r\nReglas estrictas de formato:\r\n- Responde SIEMPRE en espa\xF1ol
     latino, nunca uses espa\xF1ol de Espa\xF1a\r\n- Respuestas cortas y conversacionales,
-    m\xE1ximo 4 oraciones\r\n- NUNCA uses asteriscos, guiones, negritas, cursivas
+    m\xE1ximo 8 oraciones\r\n- NUNCA uses asteriscos, guiones, negritas, cursivas
     ni ning\xFAn formato markdown\r\n- NUNCA hagas listas ni enumeraciones\r\n- Habl\xE1
     de forma natural como si fuera una conversaci\xF3n oral\r\n- No uses palabras
     como \"fascinante\", \"interesante\" ni frases de relleno"
@@ -1277,8 +1277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bc1078e65462d34abe2521e3ac78c9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextToSpeech
-  rate: 1
-  volume: 100
+  speakingRate: 1
+  pitch: 0
 --- !u!95 &1975811829 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: e539a9f65ab01d348931594ab85ad843, type: 3}
